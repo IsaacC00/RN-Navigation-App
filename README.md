@@ -5,8 +5,8 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
 ## Get started
 
-0. install expo-router 4.0.1
-   in npm website 
+0. npm i expo-router@3.5.21
+   
 
 1. Install dependencies
 
