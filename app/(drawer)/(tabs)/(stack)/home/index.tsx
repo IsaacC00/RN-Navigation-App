@@ -1,8 +1,16 @@
 import CustomButton from '@/components/shared/CustomButton'
-import { router } from 'expo-router'
+import { DrawerActions } from '@react-navigation/native';
+import { router, useNavigation } from 'expo-router'
 import { View } from 'react-native'
 
 const HomeScreen = () => {
+
+  //? abrir el menu de drawer desde un boton
+  const navigation = useNavigation();
+  const onToogleDrawer = () => {
+    navigation.dispatch( DrawerActions.openDrawer );
+  } 
+
   return (
     
     <View className='px-10 py-10'>
@@ -27,6 +35,9 @@ const HomeScreen = () => {
 
       <CustomButton className='mb-5' variant='text-only' onPress={() => router.push('/home')}>
         Home
+      </CustomButton>
+      <CustomButton onPress={onToogleDrawer}>
+        Abrir Menu
       </CustomButton>
 
     </View>

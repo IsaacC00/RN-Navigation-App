@@ -1,11 +1,22 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { Platform } from 'react-native';
 
-import { Slot, SplashScreen, Stack } from 'expo-router';
+import { Slot, SplashScreen } from 'expo-router';
+import * as NavigationBar from 'expo-navigation-bar';
 import { useFonts } from 'expo-font';
+import { StatusBar } from 'expo-status-bar';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { Drawer } from 'expo-router/drawer';
 
 import './global.css';
 
 SplashScreen.preventAutoHideAsync();
+
+const android = Platform.OS === 'android';
+
+if (android) {
+  NavigationBar.setBackgroundColorAsync('white');
+}
 
 const RootLayout = () => {
 
@@ -20,14 +31,21 @@ const RootLayout = () => {
     if (error) throw new Error("");
 
     if (fontLoaded) SplashScreen.hideAsync();
-    
-  }, [fontLoaded,error])
 
-  if (!fontLoaded && !error )return null;
+  }, [fontLoaded, error])
+
+  if (!fontLoaded && !error) return null;
 
   //? el slot funcion renderizando el hijo o las vistas que encuentre en la carpeta app
-  return <Slot />
-  
+  return (
+    <>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <Slot />
+        <StatusBar style='dark' />
+      </GestureHandlerRootView>
+    </>
+  )
+
 }
 
 export default RootLayout
